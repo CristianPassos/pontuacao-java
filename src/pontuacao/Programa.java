@@ -10,13 +10,13 @@ public class Programa {
 		Locale.setDefault(Locale.US);
 		
 		Scanner sc = new Scanner(System.in);
-		int qtdCompras, qtdAtrasoCliente, score;
+		int qtdCompras, qtdAtrasoCliente, score, ptsFormaPagamento, ptsInadi;
 		
 		char tipoPagamento;
 		
 		double ticketMedio, resultTicket;
 		
-		final double VLRCOMPRA = 3.000;
+		final double VLRCOMPRA = 3000;
 		
 		System.out.println("SISTEMA DE PERFIL DE CLIENTE ");
 		System.out.println("--------------------------------");
@@ -35,7 +35,7 @@ public class Programa {
 		tipoPagamento = sc.next().charAt(0);
 		
 		
-		resultTicket = qtdCompras * ticketMedio;
+		resultTicket = ticketMedio * qtdCompras;
 		if (qtdCompras <= 0) {
 			System.out.printf("Score de volume de compras = 0 pontos");
 		}
@@ -47,6 +47,25 @@ public class Programa {
 		else {
 			System.out.printf("Score de volume de compras = 60 pontos");
 		}
+		
+		if (qtdAtrasoCliente > 1 || qtdCompras == 0) {
+			ptsInadi = 0;
+		} else if (qtdCompras > 0 && qtdAtrasoCliente >= 1) {
+			ptsInadi = 15;
+		} else {
+			ptsInadi = 30;
+		}
+		
+		if (tipoPagamento == 'D' || tipoPagamento == 'd') {
+			ptsFormaPagamento = 5;
+		} else {
+			ptsFormaPagamento = 10;
+		}
+		
+		System.out.println();
+		System.out.println("Score de inadimplência = " + qtdAtrasoCliente + " pontos");
+		System.out.println("Score de forma de pagamento " + ptsFormaPagamento);
+		System.out.println("Score de inadimplência = " + ptsInadi + " pontos");
 	}
 
 }
