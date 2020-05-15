@@ -10,7 +10,9 @@ public class Programa {
 		Locale.setDefault(Locale.US);
 		
 		Scanner sc = new Scanner(System.in);
-		int qtdCompras, score;
+		int qtdCompras, qtdAtrasoCliente, score;
+		
+		char tipoPagamento;
 		
 		double ticketMedio;
 		
@@ -23,6 +25,12 @@ public class Programa {
 		
 		System.out.printf("Qual o ticket médio? ");
 		ticketMedio = sc.nextDouble();
+		
+		System.out.printf("Quantas vezes o cliente atrasou o pagamento? ");
+		qtdAtrasoCliente = sc.nextInt();
+		
+		System.out.printf("A maioria das compras foi em dinheiro, cartão, ou boleto (D/C/B)? ");
+		tipoPagamento = sc.next().charAt(0);
 	}
 
 }
