@@ -10,13 +10,15 @@ public class Programa {
 		Locale.setDefault(Locale.US);
 		
 		Scanner sc = new Scanner(System.in);
-		int qtdCompras, qtdAtrasoCliente, score, ptsFormaPagamento, ptsInadi;
+		int qtdCompras, qtdAtrasoCliente, score, ptsFormaPagamento, ptsInadi, ptsScoreTotal, ptsCompras;
 		
 		char tipoPagamento;
 		
 		double ticketMedio, resultTicket;
 		
 		final double VLRCOMPRA = 3000;
+		
+		String classficacaoCliente;
 		
 		System.out.println("SISTEMA DE PERFIL DE CLIENTE ");
 		System.out.println("--------------------------------");
@@ -37,15 +39,15 @@ public class Programa {
 		
 		resultTicket = ticketMedio * qtdCompras;
 		if (qtdCompras <= 0) {
-			System.out.printf("Score de volume de compras = 0 pontos");
+			ptsCompras = 0;
 		}
 		else if(resultTicket <= VLRCOMPRA && qtdCompras <= 2) {
-			System.out.printf("Score de volume de compras = 20 pontos");
+			ptsCompras = 20;
 		}else if(resultTicket <= VLRCOMPRA  && qtdCompras > 2) {
-			System.out.printf("Score de volume de compras = 40 pontos");
+			ptsCompras = 40;
 		}
 		else {
-			System.out.printf("Score de volume de compras = 60 pontos");
+			ptsCompras = 60;
 		}
 		
 		if (qtdAtrasoCliente > 1 || qtdCompras == 0) {
@@ -62,7 +64,18 @@ public class Programa {
 			ptsFormaPagamento = 10;
 		}
 		
+		ptsScoreTotal = ptsCompras + ptsInadi + ptsFormaPagamento;
+
+		if (ptsScoreTotal <= 25) {
+			classficacaoCliente = "BRONZE";
+		} else if (ptsScoreTotal > 25 && ptsScoreTotal <= 75) {
+			classficacaoCliente = "PRATA";
+		} else {
+			classficacaoCliente = "OURO";
+		}
+		
 		System.out.println();
+		System.out.println("Score de volume de compras = " + ptsCompras + " pontos");
 		System.out.println("Score de inadimplência = " + qtdAtrasoCliente + " pontos");
 		System.out.println("Score de forma de pagamento " + ptsFormaPagamento);
 		System.out.println("Score de inadimplência = " + ptsInadi + " pontos");
